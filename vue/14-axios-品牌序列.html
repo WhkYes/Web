@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap-3.3.7.css"/>
+	</head>
+	<body>
+        
+        
+        
+		<div id="app">
+            
+            <div class="panel panel-primary">
+                  <div class="panel-heading">
+                        <h3 class="panel-title">添加品牌</h3>
+                  </div>
+                  <div class="panel-body form-inline">
+                     <div class="form-group">
+                          <label >Id：</label>
+                            <input type="text" v-model="id">
+                    </div>
+                    <div class="form-group">
+                        <label >Name：</label>
+                        <input type="text" v-model="name">
+                        <input type="button" value="添加" @click="add">
+                     </div>
+                  </div>
+                 
+            </div>
+            
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>name</th>
+                        <th>ctime</th>
+                        <th>del</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in list[0]" :key="item.id">
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.ctime}}</td>
+                        <td><a href="#">删除</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <input type="button" value="get" @click="getResponse">
+        </div>
+	</body>
+	<script type="text/javascript">
+		var app = new Vue({
+            el:"#app",
+            data:{
+                list : [],
+                name:"",
+                id:"",
+                ctime:new Date()
+            },
+            methods:{
+                async getResponse(){
+                    const response = await axios.get("http://api.cms.liulongbin.top/api/getprodlist")
+                    // console.log(response.data.message)
+                    this.list.push(response.data.message)
+                    console.log(this.list[0])
+                },
+                add:function(){
+                    this.list[0].push({ctime:this.ctime,id:this.id,name:this.name})
+                }
+            }
+        })
+	</script>
+</html>

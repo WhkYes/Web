@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="../../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			#liList{
+				list-style: none;
+			}
+			.destory{
+				/* display:none; */
+				background-color: #FFFFFF;
+				position: absolute;
+				right: 0;
+			}
+			.divList{
+				width: 300px;
+				border: 2px solid aqua;
+				position: absolute;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<h1>记事本</h1>
+			<input type="text" v-model="message" @keyup.enter="add" placeholder="输入事件"/>
+			<button type="button" @click="add">添加</button>
+			<div  class="divList" >
+				<ul id="liList" >
+					<li v-for="(mess,index) in list" >
+						<span> {{index+1}}</span>
+						<label>{{mess}}</label>
+						<button  type="button"  class="destory" @click="remove2">x</button>
+					</li>
+				</ul>
+				<div v-show="list.length>0">
+					<p>事件统计:{{list.length}}</p>
+					<button type="button" @click="remove1">清空</button>
+				</div>
+				
+			</div>
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:"#app",
+			data:{
+				list:["学习","吃饭","睡觉"],
+				message:"",
+				ifremove:false
+			},
+			methods:{
+				add:function(){
+					if(this.message==""){
+						alert("没有输入事件~")
+					}else{
+						this.list.push(this.message)
+					}
+					
+				},
+				remove1:function(){
+					this.list.splice("")
+				},
+				remove2:function(index){
+					this.list.splice(index,1)
+				}
+			}
+		})
+	</script>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>demo计数器</title>
+		<script src="../../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="./css/index.css"/>
+	</head>
+	<body>
+		<div id="app">
+			<div class="input-num">
+				<button type="button" @click="sub">-</button>
+				<span>{{ num }}</span>
+				<button type="button" @click="add">+</button>
+			</div>
+			<img src="./img/图片1.gif" >
+		</div>
+	</body>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:"#app",
+			data:{
+				num:1
+			},
+			methods:{
+				add:function(){
+					if(this.num < 10){
+						this.num ++
+					}else{
+						alert("到顶了！")
+					}
+					
+				},
+				sub:function(){
+					if(this.num > 0){
+						this.num --
+					}else{
+						alert("到底了！")
+					}
+				}
+			}
+		})
+	</script>
+</html>

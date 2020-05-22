@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<!-- <div id="base01">
+			{{ message }}
+			<h2>{{ age +"!"}}</h2>
+			<h2 v-text="message+'!'"></h2>
+			<h2 v-text="age"></h2>
+		</div> -->
+		
+		<!--
+		 v-text:不能识别标签，只输出文本
+		 v-html:设置元素的innerHTML，内容中有html结构的代码会被解析
+		 -->
+		<!-- <div id="base02">
+			<h2 v-text="message1"></h2>
+			<h2 v-html="message1"></h2>
+		</div> -->
+		
+		<!-- 
+		v-on:为元素绑定事件；
+		 可以简写成@;
+		 绑定的方法定义在methos中；
+		 方法内部通过this可以访问定义在data内的数据；
+		 -->
+		<div id="base03">
+			<input type="button" value="v-on指令-点击" v-on:click="alertmessage" />
+			<input type="button" value="v-on指令-双击" @dblclick="alertmessage" />
+			<input type="button" value="v-on指令-鼠标移入" @mouseenter="ChangeMessage" />
+			<h2 @click="ChangeMessage">{{message}}</h2>
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		/* var app = new Vue({
+			el:"#base01",
+			data:{
+				message:"努力学习编程！",
+				age:'20'
+			}
+		}) */
+		
+		/* var html_text = new Vue({
+			el:"#base02",
+			data:{
+				message1:"<a href='https://www.baidu.com'>百度一下</a>"
+			}
+		}) */
+		
+		var v_on = new Vue({
+			el:"#base03",
+			data:{
+				message:"夏天喝冰可乐！"
+			},
+			methods:{
+				ChangeMessage:function(){
+					this.message += "真凉快！"
+				},
+				alertmessage:function(){
+					alert(this.message)
+				}
+				}
+		})
+	</script>
+</html>

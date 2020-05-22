@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<!-- <script src="js/vue.js" type="text/javascript" charset="utf-8"></script> -->
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		
+	</head>
+	<body>
+		<button type="button" class="get">get</button>
+		<button type="button" class="post">post</button>
+	</body>
+	<script type="text/javascript">
+		document.querySelector(".get").onclick = function(){
+			axios.get("https://autumnfish.cn/api/joke/list?num=3")
+			.then(function(response){
+				console.log(response);
+			},function(err){
+				console.log(err);
+			})
+		}
+		document.querySelector(".post").onclick = function(){
+			axios.post("https://autumnfish.cn/api/user/reg",{username:"maigaoshi"})
+			.then(function(response){
+				console.log(response);
+			},function(err){
+				console.log(err);
+			})
+		}
+	</script>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap-3.3.7.css"/>
+	</head>
+	<body>
+		<div id="app">
+			
+			<div class="panel panel-primary">
+				  <div class="panel-heading">
+						<h3 class="panel-title">添加</h3>
+				  </div>
+				  <div class="panel-body form-inline">
+					<label >id: <input type="text" v-model="id"></label>
+					<label >name: <input type="text" v-model="name" @keyup.enter="add"></label>
+					<input type="button" value="添加" @click="add">
+					<label >关键词过滤: <input type="text" v-model="keywords" v-focus v-color="'blue'"></label>
+				  </div>
+			</div>
+			
+			<table class="table table-hover table-bordered table-striped" >
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>name</th>
+						<th>ctime</th>
+						<th>operation</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="item in search(keywords)" :key="item.key">
+						<td>{{item.id}}</td>
+						<td>{{item.name}}</td>
+						<td>{{item.ctime | changeDate()}}</td>
+						<td>
+							<a href="#" @click="remove">删除</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+		<div id="app2"><h2 v-privateColor="'aqua'" v-fontsize="'140px'">{{date2 | changeDate()}}</h2></div>
+		</body>
+	<script type="text/javascript">
+		/* 
+		filter:过滤器，分为全局过滤器和局部过滤器；当全局和局部过滤器的函数名称相同时，以局部为主
+
+		全局过滤器：所有Vue实例都可以使用
+		Vue.filter(funcName,function(){})
+		funcName:函数名
+		function：函数体,形参为要过滤的对象
+
+		局部过滤器：存在于某个vue实例中，只有该实例才能使用
+		filters: { // 私有局部过滤器，只能在 当前 VM 对象所控制的 View 区域进行使用}
+		 */
+
+		 /* 
+		 padStart(maxStr,str):填充字符串
+		 maxStr:填充字符串最大长度
+		 str:填充的字符串
+		  */
+		Vue.filter('changeDate',function(dateStr){
+			var dt = new Date(dateStr)
+			var y = dt.getFullYear()
+			var m = (dt.getMonth()+1).toString().padStart(2,'0')
+			var d = dt.getDate().toString().padStart(2,'0')
+			var h = dt.getHours().toString().padStart(2,'0')
+			var min = dt.getMinutes().toString().padStart(2,'0')
+			var s = dt.getSeconds().toString().padStart(2,'0')
+
+			return `${y}-${m}-${d} 	${h}:${min}:${s}`
+		} )
+		// 自定义指令
+		Vue.directive('focus',{
+			inserted:function(el){
+				el.focus()
+			}
+		})
+		Vue.directive('color', {
+			bind:function(el,binding){
+				el.style.color = binding.value
+			}
+		})
+
+
+
+		var app = new Vue({
+			el:"#app",
+			data:{
+				product:[
+					{id:1,name:"奔驰",ctime:new Date()},
+					{id:2,name:"宝马",ctime:new Date()}
+				],
+				id:"",
+				name:"",
+				keywords:""
+			},
+			methods: {
+				add:function(){
+					this.product.push({id:this.id,name:this.name,ctime:new Date()})
+					this.id = this.name = ""
+				},
+				remove:function(){
+					this.product.shift({id:this.id,name:this.name,ctime:new Date()})
+				},
+				search:function(keywords){
+					// newList用于存放新的数据
+					newList = []
+					/* this.product.forEach(function(item){
+						// indexOf:如果item.name不包含keywords，则返回-1
+						if(item.name.indexOf(keywords) != -1){
+							// 包含，将item存入newList
+							newList.push(item)
+						}	
+						// console.log(item)	
+					});
+					// 返回newList
+					return newList */
+
+
+					return this.product.filter(item =>{
+						if(item.name.includes(keywords)){
+							return item
+						}
+					})
+
+				}
+			},
+			
+		})
+		var app2 = new Vue({
+			el:"#app2",
+			data:{
+				date2:new Date()
+			},
+			// 私人过滤器
+			filters:{
+				changeDate:function(dateStr){
+					var dt = new Date(dateStr)
+					var y = dt.getFullYear()
+					var m = (dt.getMonth()+1).toString().padStart(2,'0')
+					var d = dt.getDate().toString().padStart(2,'0')
+					var h = dt.getHours().toString().padStart(2,'0')
+					var min = dt.getMinutes().toString().padStart(2,'0')
+					var s = dt.getSeconds().toString().padStart(2,'0')
+
+					return `${y}-${m}-${d} 	${h}:${min}:${s} 这是私人过滤器`
+				}
+			},
+			//私人自定义指令
+			directives:{
+				'privatecolor':{
+					bind:function(el,bindling){
+						el.style.color = bindling.value
+					}
+				},
+				'fontsize':function(el,bindling){
+					el.style.fontSize = bindling.value
+				}
+			}
+		})
+	</script>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap-3.3.7.css"/>
+	</head>
+	<body>
+		<div id="app">
+			
+			<div class="panel panel-primary">
+				  <div class="panel-heading">
+						<h3 class="panel-title">添加</h3>
+				  </div>
+				  <div class="panel-body form-inline">
+					<label >id: <input type="text" v-model="id"></label>
+					<label >name: <input type="text" v-model="name"></label>
+					<input type="button" value="添加" @click="add">
+					<label >关键词过滤: <input type="text" v-model="keywords"></label>
+				  </div>
+			</div>
+			
+			<table class="table table-hover table-bordered table-striped" >
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>name</th>
+						<th>ctime</th>
+						<th>operation</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="item in search(keywords)" :key="item.key">
+						<td>{{item.id}}</td>
+						<td>{{item.name}}</td>
+						<td>{{item.ctime}}</td>
+						<td>
+							<a href="#" @click="remove">删除</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+		</body>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:"#app",
+			data:{
+				product:[
+					{id:1,name:"奔驰",ctime:new Date()},
+					{id:2,name:"宝马",ctime:new Date()}
+				],
+				id:"",
+				name:"",
+				keywords:""
+			},
+			methods: {
+				add:function(){
+					this.product.push({id:this.id,name:this.name,ctime:new Date()})
+					this.id = this.name = ""
+				},
+				remove:function(){
+					this.product.shift({id:this.id,name:this.name,ctime:new Date()})
+				},
+				search:function(keywords){
+					// newList用于存放新的数据
+					newList = []
+					/* this.product.forEach(function(item){
+						// indexOf:如果item.name不包含keywords，则返回-1
+						if(item.name.indexOf(keywords) != -1){
+							// 包含，将item存入newList
+							newList.push(item)
+						}	
+						// console.log(item)	
+					});
+					// 返回newList
+					return newList */
+
+
+					return this.product.filter(item =>{
+						if(item.name.includes(keywords)){
+							return item
+						}
+					})
+
+				}
+			},
+		})
+	</script>
+</html>

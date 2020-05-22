@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>过滤器</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{message | changeMessage()}}</p>
+    </div>
+</body>
+    <script>
+        Vue.filter('changeMessage', function(message){
+            return message.replace(/真是/g,"太")
+        })
+
+        var app = new Vue({
+            el:"#app",
+            data:{
+                message:"夏天真是热，冬天真是冷，秋天真是爽"
+            }
+        })
+    </script>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+	</head>
+	<body>
+		<div id="app">
+			
+			<input type="button" value="点击" @click="fun1('执行中…………','执行中………………')" />
+			<input type="text" @keyup.enter="fun2" />
+		</div>
+	</body>	
+	<script type="text/javascript">
+		var app = new Vue({
+			el:"#app",
+			methods:{
+				fun1:function(a,b){
+					console.log("执行中……");
+					console.log(a);
+					console.log(b);
+				},
+				fun2:function(){
+					alert("执行完毕！")
+				}
+			}
+		})
+	</script>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="../../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			#app{
+				position: relative;
+				width: 480px;
+				margin: 200px auto;
+			}
+			.img1{
+				height: 60%;
+				width: 60%;
+			}
+			.left img{
+				cursor: pointer;
+				position: absolute;
+				left: -50px;
+				width: 50px;
+				height: 100px;
+			}
+			.right img{
+				cursor: pointer;
+				position: absolute;
+				left: auto;
+				width: 50px;
+				height: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<img :src="imgArr[index]" class="img1" >
+			<a class="left" @click="prev" v-show="index!=0"><img src="./image/prev.png" ></a>
+			<a class="right" @click="next" v-show="index<imgArr.length-1"><img src="./image/next.png" ></a>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:"#app",
+			data:{
+				imgArr:[
+					'./image/1.jpg',
+					'./image/2.jpg',
+					'./image/3.jpg',
+					'./image/4.jpg',
+					'./image/5.jpg',
+					'./image/6.png'
+				],
+				index : 0
+			},
+			methods:{
+				prev:function(){
+					this.index--
+				},
+				next:function(){
+					this.index++
+				}
+			}
+		})
+	</script>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+	</head>
+	<body>
+		<div id="app">
+			<ul>
+				<li v-for="(area,index) in areas">{{index+1}}.广东省有：{{area}}</li>
+				<li v-for="(value,key,index) in obj" >值是：{{value}} ,键是：{{key}},索引是：{{index}}</li>
+				<li v-for="count in 10">{{count}}</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:"#app",
+			data:{
+				areas:['汕头','东莞','深圳','广州'],
+				obj:{'name':'Tom','age':55}
+			}
+		})
+	</script>
+</html>

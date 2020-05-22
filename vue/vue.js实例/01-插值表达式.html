@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<!-- <script src="https://unpkg.com/axios/dist/axios.min.js" type="text/javascript" charset="utf-8"></script> -->
+		
+	</head>
+	<body>
+		<div id="app">
+			{{date}}
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:"#app",
+			data:{
+				date:new Date()
+			},
+			mounted:function(){
+				var _this = this;
+				this.timer = setInterval(function(){
+					_this.date = new Date();
+				},1000);
+			},
+			beforeDestroy:function(){
+				if (this.timer){
+					clearInterval(this.timer);
+				}
+			}
+		})
+	</script>
+</html>

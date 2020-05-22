@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+	</head>
+	<body>
+		<div id="app">
+			<button type="button"  @click="justIsShow">图片显示/隐藏</button>
+			<button type="button"  @click="ageIsShow">图片显示/隐藏</button>
+			<img src="demo/图片切换/image/prev.png" v-show="isShow">
+			<img src="demo/图片切换/image/prev.png" v-if="age>=18">
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+		//v-if同v-show差不多，但v-if是直接将标签注释掉来控制显示隐藏的，
+		//而v-show是通过display属性来控制显示隐藏的
+		var app = new Vue({
+			el:"#app",
+			data:{
+				isShow:false,
+				age:17
+			},
+			methods:{
+				justIsShow:function(){
+					this.isShow = !this.isShow;
+				},
+				ageIsShow:function(){
+					this.age ++;
+					console.log(this.age);
+				}
+			}
+		})
+	</script>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js" type="text/javascript" charset="utf-8"></script>
+		
+	</head>
+	<body>
+		<div id="app">
+			<input type="button" value="get" @click="getResponse"/>
+			<input type="button" value="post" @click="postResponse"/>
+			<input type="button" value="jsonp" @click="jsonpResponse"/>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:"#app",
+			data:{},
+			methods:{
+				/* getResponse:function(){
+					axios.get('http://api.cms.liulongbin.top/api/getlunbo')
+					.then(function(response){
+						console.log(123);
+						console.log(response.data.message[0].img);
+						
+					},function(err){
+						console.log(err);
+						
+					})
+				}, */
+
+				async getResponse(){
+					const {data} = await axios.get('http://api.cms.liulongbin.top/api/getlunbo')
+					
+					console.log(data)
+				},
+				async postResponse(){
+					const response = await axios.post('http://api.cms.liulongbin.top/api/post',{name:"ffffuk",age:18,area:"Africa"})
+					console.log(response)
+				},
+				
+				
+			}
+		})
+	</script>
+</html>

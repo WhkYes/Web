@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<!-- <script src="https://unpkg.com/axios/dist/axios.min.js" type="text/javascript" charset="utf-8"></script> -->
+		
+	</head>
+	<body>
+		<div id="app"  class="div1" @click="clickDiv1" style="width: 80px;background-color: #00FFFF;">
+			div1<div class="div2" @click.self="clickDiv2" style="width: 60px;background-color: #AD2A27 ;">
+				div2<button type="button" @click="clickButton">按钮</button>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:"#app",
+			methods:{
+				clickDiv1:function(){
+					console.log("这是Div1");
+				},
+				clickDiv2:function(){
+					console.log("这是Div2");
+				},
+				clickButton:function(){
+					console.log("这是Button");
+				}
+			}
+		})
+	</script>
+</html>
