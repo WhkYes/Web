@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+        <script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+        <!-- <link rel="stylesheet" href="./css/animate.css"> -->
+        <!-- animate使用：https://animate.style/#usage -->
+		<style>
+            #ball{
+                height: 15px;
+                width:15px;
+                background-color: aqua;
+                border-radius: 50%;
+                transform: translateX();
+            }
+        </style>
+	</head>
+	<body>
+		<div id="app">
+            <button @click="flag=!flag">toggle</button>
+            <transition 
+            @before-enter="beforeEnter"
+            @enter = "Enter"
+            @after-enter = "afterEnter">
+                <div id="ball" v-show="flag"></div>
+            </transition>
+            
+        </div>
+        <table>
+            <tr>
+                <td>
+                    
+                </td>
+            </tr>
+        </table>
+	</body>
+    <script type="text/javascript">
+    
+		var app = new Vue({
+            el:"#app",
+            data:{
+                flag : false
+            },
+            methods: {
+                // el可以理解为由document.getElementById()的返回值
+
+                // 动画开始之前
+                beforeEnter:function(el){
+                    el.style.transform = 'translate(0,0)'
+                },
+                // 动画结束状态
+                Enter:function(el,done){
+                    // 必须要有el.offsetWidth,不然没有动画效果
+                    el.offsetWidth
+                    el.style.transform = 'translate(100px,200px)'
+                    el.style.transition = 'all 2s ease'
+
+
+                    // done()相当于调用afterEnter()
+                    done()
+                },
+                // 回调函数
+                afterEnter:function(el){
+                    this.flag = !this.flag
+                },
+            },
+        })
+	</script>
+</html>

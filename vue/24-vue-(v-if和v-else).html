@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div id ="app"> 
+        <input type="button" value="登录" @click="flag=true">
+        <input type="button" value="注册" @click="flag=false">
+        <login v-if="flag"></login>
+        <reg v-else="flag"></reg>
+    </div>
+
+    <template id="isLogin">
+        <div>
+            用户名：<input type="text"><br>
+            密码：<input type="text">
+            
+        </div>
+    </template>
+    <template id="isReg">
+        <div>
+            用户名：<input type="text"><br>
+            密码：<input type="password"><br>
+            确认密码：<input type="password">
+            
+        </div>
+    </template>
+    <script>
+        Vue.component("login", {
+            template:"#isLogin",
+
+        })
+        Vue.component("reg", {
+            template:"#isReg",
+
+        })
+
+     //创建Vue实例,得到 ViewModel
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                flag:true
+            },
+            methods: {}
+        })
+    </script>
+</body>
+
+</html>

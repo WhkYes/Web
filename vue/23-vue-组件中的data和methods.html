@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<script src="./js/vue.js"></script>
+</head>
+
+<body>
+	<div id ="app">
+        <my-com></my-com>
+        <br>
+        <my-com></my-com>
+    </div>
+    
+
+
+    <template id="temp">
+        <div>
+            <h1>这是data中的message:{{message}}</h1>
+            <input type="button" value="+1" @click="add">
+            <h2>num:{{num}}</h2>
+        </div>
+    </template>
+	<script>
+		// 全局组件
+		Vue.component("my-com", {
+            template: "#temp",
+            data:function(){
+                return {
+                    message:"我是组件中data的message",
+                    num:0
+                }
+            },
+            methods:{
+                add:function(){
+                    this.num ++ 
+                }
+            }
+        })
+
+	 	//创建Vue实例,得到 ViewModel
+		var vm = new Vue({
+			el: '#app',
+			data: {},
+			methods: {}
+		})
+	</script>
+</body>
+
+</html>

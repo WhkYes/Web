@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<!-- <script src="https://unpkg.com/axios/dist/axios.min.js" type="text/javascript" charset="utf-8"></script> -->
+		<style>
+            ul{
+                list-style: none;
+                margin : 0;
+                padding: 0;
+                
+            }
+            li{
+                /* 列表间距 */
+                line-height: 30px;
+                border: 1px dashed #ccc;
+                margin:5px;
+                font-size: 15px;
+                padding-left: 12px;
+                width: 500px;
+                /* 移入鼠标样式 */
+                cursor: pointer;
+            }
+
+            li:hover{
+                background-color: aqua;
+                /* 边框阴影 */
+                box-shadow: 0 0 7px gray;
+            }
+
+            /* 
+            v-enter:进入动画开始状态
+            v-leave-to：进入动画结束状态
+             */
+            .v-enter,
+            .v-leave-to{
+                opacity: 0;
+                transform: translateX(500px);
+            }
+            /* 
+            用于定义动画持续时间
+             */
+            .v-enter-active,
+            .v-leave-active{
+                transition: all 2s ease;
+            }
+            /* 
+            当元素改变定位时，有一个缓动效果
+             */
+            .v-move{
+                transition: all 2s ease;
+            }
+            /* 
+            表示要被删除的那个元素；让它脱离标准流（让它不再占位置），这样后面的元素就能浮动上来
+             */
+            .v-leave-active{
+                position: absolute;
+            }
+        </style>
+	</head>
+	<body>
+		<div id="app">
+            <select>
+                <option></option>
+                <option></option>
+                <option></option>
+            </select>
+            <div>
+                id: <input type="text" v-model="id" >
+                name: <input type="text" v-model="name"> 
+                <input type="button" value="添加" @click="add">
+            </div>
+            <transition-group tag="ul">
+                <li v-for="(item, index) in list" :key="item.id" @click="remove(index)">{{item.id}}---------{{item.name}}</li>
+            </transition-group>
+        </div>
+	</body>
+	<script type="text/javascript">
+		var app = new Vue({
+            el:"#app",
+            data:{
+                list:[
+                    {id:1,name:"王五"},
+                    {id:2,name:"张三"},
+                    {id:3,name:"李四"}
+                ],
+                id:"",
+                name:""
+            },
+            methods: {
+                remove:function(id){
+                    this.list.splice(id,1)
+                },
+                add:function(){
+                    this.list.push({id:this.id,name:this.name})
+                    this.id = this.name = ""
+                }
+            },
+        })
+	</script>
+</html>
+

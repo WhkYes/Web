@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<script src="./js/vue.js"></script>
+</head>
+
+<body>
+	<div id ="app">
+		<my-com3></my-com3>
+	
+	</div>
+    <template id="temp">
+        <div>
+            <h1>我是第三种全局组件</h1>
+            <h2>我是第三种全局组件</h2>
+        </div>
+    </template>
+	<script>
+		// 创建全局组件
+		Vue.component("my-com3", {
+            template: "#temp"
+        })
+
+	 	//创建Vue实例,得到 ViewModel
+		var vm = new Vue({
+			el: '#app',
+			data: {},
+			methods: {}
+		})
+	</script>
+</body>
+
+</html>

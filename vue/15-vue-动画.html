@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<!-- <script src="https://unpkg.com/axios/dist/axios.min.js" type="text/javascript" charset="utf-8"></script> -->
+		<style>
+            /* 
+            v-enter:进入动画开始状态
+            v-leave-to：进入动画结束状态
+             */
+            .v-enter,
+            .v-leave-to{
+                opacity: 0;
+                transform: translateX(200px);
+            }
+            /* 
+            用于定义动画持续时间
+             */
+            .v-enter-active,
+            .v-leave-active{
+                transition: all 2s ease;
+            }
+        </style>
+	</head>
+	<body>
+		<div id="app">
+            <input type="button" @click="toggle" value="toggle">
+            <!-- Vue提供了transition标签，只要放在该标签内就能实现动画效果 -->
+            <transition>
+                <h2 v-show="flag">我是一个动画！</h2>
+            </transition>
+        </div>
+	</body>
+	<script type="text/javascript">
+		var app = new Vue({
+            el:"#app",
+            data:{
+                flag : false
+            },
+            methods: {
+                toggle:function(){
+                    this.flag = !this.flag
+                }
+            },
+        })
+	</script>
+</html>
